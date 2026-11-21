@@ -50,7 +50,7 @@ Use `docker volume rm s13-training-camps-data` only when you intentionally want 
 
 ## CI/CD
 
-`.github/workflows/docker-build.yml` builds the image from the root `Dockerfile` on a GitHub-hosted `ubuntu-latest` runner for every push and pull request. Pushes publish `devopseasylearning/s13-training-camps:<full-commit-sha>` to Docker Hub; pull requests build without publishing. GitHub repository Actions secrets `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` must contain the Docker Hub username and an access token.
+`.github/workflows/docker-build.yml` builds the image from the root `Dockerfile` on a GitHub-hosted `ubuntu-latest` runner for every push and pull request. Pushes publish `devopseasylearning/s13-training-camps:<full-commit-sha>` to Docker Hub; pull requests build without publishing. The workflow uses the GitHub Environment named `DOCKEHUB_TOKEN`, with a `DOCKERHUB_TOKEN` Actions secret containing a Docker Hub access token.
 
 Pull an image with:
 
