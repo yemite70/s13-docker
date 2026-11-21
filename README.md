@@ -12,7 +12,7 @@ The `app` container provides everything:
 - Enrollment API
 - File-based demo persistence through the `app-data` Docker volume
 
-The application uses only the Node.js standard library and has no package dependencies. CI tags the image with the last four characters of the Git commit SHA; local builds use `latest` when `IMAGE_TAG` is not set.
+The application uses only the Node.js standard library and has no package dependencies. CI publishes images tagged with the full Git commit SHA.
 
 ## Tools used
 
@@ -50,4 +50,10 @@ Use `docker volume rm s13-training-camps-data` only when you intentionally want 
 
 ## CI/CD
 
-`.github/workflows/docker-build.yml` builds the single image from the root `Dockerfile` on a GitHub-hosted `ubuntu-latest` runner for every push and pull request. The image is tagged with the full Git commit SHA, so repeated commits always produce distinct image tags.
+`.github/workflows/docker-build.yml` builds the image from the root `Dockerfile` on a GitHub-hosted `ubuntu-latest` runner for every push and pull request. Pushes publish `devopseasylearning/s13-training-camps:<full-commit-sha>` to Docker Hub; pull requests build without publishing. GitHub repository Actions secrets `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` must contain the Docker Hub username and an access token.
+
+Pull an image with:
+
+```bash
+docker pull devopseasylearning/s13-training-camps:<commit-sha>
+```
